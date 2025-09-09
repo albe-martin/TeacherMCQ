@@ -4,15 +4,19 @@ import React from "react";
 function ModeToggle({ mode, setMode }) {
   return (
     <div className="flex items-center gap-4">
-      <h2>Mode Toggle</h2>
+      <span className="font-medium text-gray-600 mr-2">View:</span>
       <button
-        className={`px-3 py-1 rounded ${mode === 'teacher' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+        className={`flex items-center gap-2 px-4 py-2 rounded-full font-semibold border transition-colors focus:outline-none
+          ${mode === 'teacher' ? 'bg-blue-500 text-white border-blue-500 shadow' : 'bg-white text-blue-500 border-gray-300 hover:bg-blue-50'}
+        `}
         onClick={() => setMode('teacher')}
       >
         Teacher
       </button>
       <button
-        className={`px-3 py-1 rounded ${mode === 'student' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+        className={`flex items-center gap-2 px-4 py-2 rounded-full font-semibold border transition-colors focus:outline-none
+          ${mode === 'student' ? 'bg-green-500 text-white border-green-500 shadow' : 'bg-white text-green-500 border-gray-300 hover:bg-green-50'}
+        `}
         onClick={() => setMode('student')}
       >
         Student
