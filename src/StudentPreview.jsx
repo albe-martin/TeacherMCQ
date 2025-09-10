@@ -77,22 +77,40 @@ function StudentPreview({ questions }) {
               %
             </span>
           </div>
-          <div className="flex gap-2 mb-8">
-            {validQuestions.map((_, idx) => (
-              <div
-                key={idx}
-                className={`w-7 h-7 rounded flex items-center justify-center font-semibold text-xs border ${
-                  current === idx
-                    ? "bg-orange-500 text-white border-orange-500"
-                    : answers[idx] !== null
-                    ? "bg-orange-200 text-orange-700 border-orange-200"
-                    : "bg-white text-gray-400 border-gray-200"
-                }`}
-              >
-                {idx + 1}
+          {validQuestions.length <= 7 ? (
+            <div className="flex gap-2 mb-8">
+              {validQuestions.map((_, idx) => (
+                <div
+                  key={idx}
+                  className={`w-7 h-7 rounded flex items-center justify-center font-semibold text-xs border ${
+                    current === idx
+                      ? "bg-orange-500 text-white border-orange-500"
+                      : answers[idx] !== null
+                      ? "bg-orange-200 text-orange-700 border-orange-200"
+                      : "bg-white text-gray-400 border-gray-200"
+                  }`}
+                >
+                  {idx + 1}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="w-full mb-8 flex flex-col items-center">
+              <div className="w-56 h-4 bg-orange-100 rounded-full relative overflow-hidden">
+                <div
+                  className="absolute top-0 left-0 h-4 bg-orange-500 rounded-full transition-all"
+                  style={{ width: `${((current + 1) / validQuestions.length) * 100}%` }}
+                />
+                <div
+                  className="absolute top-0 left-0 h-4 w-4 bg-orange-500 rounded-full border-2 border-white shadow"
+                  style={{ left: `calc(${((current) / validQuestions.length) * 100}% - 8px)` }}
+                />
               </div>
-            ))}
-          </div>
+              <div className="mt-2 text-sm text-gray-700 font-medium">
+                Question {current + 1} of {validQuestions.length}
+              </div>
+            </div>
+          )}
           <div className="flex flex-col gap-1 mt-2 text-xs">
             <div className="flex items-center gap-2">
               <span className="w-3 h-3 rounded bg-orange-500 inline-block"></span>{" "}
