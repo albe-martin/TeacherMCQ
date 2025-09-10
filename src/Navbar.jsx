@@ -19,23 +19,30 @@ export default function Navbar({ mode, setMode }) {
       <div className="flex items-center gap-4">
         {showGenerate && (
           <button
-            className="px-4 py-2 rounded font-semibold transition-colors focus:outline-none bg-white border border-orange-500 text-orange-600 hover:bg-orange-100"
+            className="px-5 py-2 rounded-full font-semibold shadow transition-all duration-200 focus:outline-none bg-gradient-to-r from-orange-400 to-orange-500 text-white hover:scale-105 hover:from-orange-500 hover:to-orange-600 active:scale-95"
             onClick={() => navigate('/')}
           >
             Generate
           </button>
         )}
         {showToggle && (
-          <div className="flex items-center gap-0 bg-white border border-orange-200 rounded-full shadow px-1 py-1">
+          <div className="relative flex items-center bg-white rounded-full shadow-md px-2 py-1 w-64 h-14 border border-orange-300">
+            {/* Animated pill toggle - clean, single border */}
+            <div
+              className={`absolute top-1 left-1 h-12 w-32 rounded-full transition-all duration-300 ease-in-out bg-gradient-to-r from-orange-400 to-orange-500 shadow ${mode === 'student' ? 'translate-x-32' : ''}`}
+              style={{ willChange: 'transform', border: '2px solid #fb923c' }}
+            />
             <button
-              className={`px-4 py-2 rounded-full font-semibold transition-colors focus:outline-none ${mode === 'teacher' ? 'bg-orange-500 text-white' : 'bg-white text-orange-500'} hover:bg-orange-100`}
+              className={`relative z-10 w-1/2 h-12 rounded-full font-sans font-bold text-lg transition-all duration-200 focus:outline-none flex items-center justify-center ${mode === 'teacher' ? 'text-orange-700' : 'text-orange-400'} active:scale-95`}
               onClick={() => setMode('teacher')}
+              style={{ background: 'transparent', border: 'none' }}
             >
               Teacher
             </button>
             <button
-              className={`px-4 py-2 rounded-full font-semibold transition-colors focus:outline-none ${mode === 'student' ? 'bg-blue-500 text-white' : 'bg-white text-blue-500'} hover:bg-blue-100`}
+              className={`relative z-10 w-1/2 h-12 rounded-full font-sans font-bold text-lg transition-all duration-200 focus:outline-none flex items-center justify-center ${mode === 'student' ? 'text-blue-700' : 'text-blue-400'} active:scale-95`}
               onClick={() => setMode('student')}
+              style={{ background: 'transparent', border: 'none' }}
             >
               Student
             </button>
