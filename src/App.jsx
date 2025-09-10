@@ -23,7 +23,7 @@ function App() {
 
   // Landing page: only QuizGenerator
   const LandingPage = () => (
-    <div className="min-h-screen flex items-center justify-center px-4">
+    <div className="h-screen flex items-center justify-center px-4 pt-52 overflow-hidden">
       <div className="w-full max-w-full">
         <QuizGenerator onGenerate={handleGenerateQuiz} />
       </div>
@@ -44,6 +44,8 @@ function App() {
     </div>
   );
 
+  // Expose questions globally for Navbar logic
+  window.questions = questions;
   return (
     <>
       <Navbar mode={mode} setMode={setMode} />

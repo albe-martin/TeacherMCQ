@@ -60,7 +60,7 @@ function QuizGenerator({ onGenerate }) {
       </nav>
 
       {/* Main card, visually separated from navbar */}
-      <div className="flex-1 flex items-center justify-center pt-32 pb-8">
+      <div className="flex-1 flex items-center justify-center pt-32 pb-64">
         <Card className="w-full max-w-3xl bg-white border border-orange-100 shadow-lg rounded-2xl p-12 flex flex-col justify-center">
           <CardHeader>
             <h1 className="text-3xl font-bold mb-2 text-orange-800 font-sans tracking-tight">Generate Quiz Questions</h1>
