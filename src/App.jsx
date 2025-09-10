@@ -23,8 +23,8 @@ function App() {
 
   // Landing page: only QuizGenerator
   const LandingPage = () => (
-    <div className="pt-20 px-4 flex justify-center">
-      <div className="w-full max-w-2xl">
+    <div className="min-h-screen flex items-center justify-center px-4">
+      <div className="w-full max-w-full">
         <QuizGenerator onGenerate={handleGenerateQuiz} />
       </div>
     </div>
@@ -33,7 +33,7 @@ function App() {
   // Teacher page: toggle, editor, preview
   const TeacherPage = () => (
     <div className="pt-20 px-4 flex justify-center min-h-screen">
-      <div className="w-full max-w-3xl">
+      <div className="w-full max-w-full">
         {mode === 'teacher' && (
           <QuizEditor questions={questions} setQuestions={setQuestions} />
         )}

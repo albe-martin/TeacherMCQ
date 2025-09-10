@@ -61,9 +61,9 @@ function StudentPreview({ questions }) {
 
   return (
     <div className="w-full min-h-screen flex justify-center items-start pt-12 bg-transparent">
-      <div className="flex gap-6 w-full max-w-7xl">
+      <div className="flex gap-6 w-full max-w-full">
         {/* Progress Card - explorer sidebar style */}
-        <div className="bg-orange-50 border border-orange-100 rounded-2xl p-6 w-64 flex flex-col items-center shadow-sm mt-2">
+        <div className="bg-orange-50 border border-orange-100 rounded-2xl p-6 w-64 h-80 flex flex-col items-center shadow-sm mt-2">
           <div className="mb-3">
             <SpiralLogo size={36} />
           </div>
@@ -77,7 +77,7 @@ function StudentPreview({ questions }) {
               %
             </span>
           </div>
-          <div className="flex gap-2 mb-2">
+          <div className="flex gap-0.5 mb-8">
             {validQuestions.map((_, idx) => (
               <div
                 key={idx}
