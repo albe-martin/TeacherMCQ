@@ -7,6 +7,7 @@ import StudentPreview from './StudentPreview';
 import ModeToggle from './ModeToggle';
 import './App.css';
 
+// Main App component: handles routing, mode toggle, and quiz state
 function App() {
   // State for mode: 'teacher' or 'student'
   const [mode, setMode] = React.useState('teacher');
@@ -14,14 +15,14 @@ function App() {
   const [questions, setQuestions] = React.useState([]);
   const navigate = useNavigate();
 
-  // Handler for generating quiz and navigating to teacher page
+  // When quiz is generated, update questions and go to teacher page
   const handleGenerateQuiz = (newQuestions) => {
     setQuestions(newQuestions);
-    setMode('teacher');
+    setMode('teacher'); // Always start in teacher mode
     navigate('/teacher');
   };
 
-  // Landing page: only QuizGenerator
+  // Landing page: only shows quiz generator
   const LandingPage = () => (
     <div className="h-screen flex items-center justify-center px-4 pt-52 overflow-hidden">
       <div className="w-full max-w-full">
@@ -30,13 +31,15 @@ function App() {
     </div>
   );
 
-  // Teacher page: toggle, editor, preview
+  // Teacher page: shows editor or student preview based on mode
   const TeacherPage = () => (
     <div className="pt-20 px-4 flex justify-center min-h-screen">
       <div className="w-full max-w-full">
+        {/* Show editor if in teacher mode */}
         {mode === 'teacher' && (
           <QuizEditor questions={questions} setQuestions={setQuestions} />
         )}
+        {/* Show student preview if in student mode */}
         {mode === 'student' && (
           <StudentPreview questions={questions} />
         )}
@@ -44,11 +47,13 @@ function App() {
     </div>
   );
 
-  // Expose questions globally for Navbar logic
+  // Expose questions globally for Navbar logic (mode toggle visibility)
   window.questions = questions;
   return (
     <>
+      {/* Navbar with mode toggle */}
       <Navbar mode={mode} setMode={setMode} />
+      {/* App routes: landing and teacher page */}
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/teacher" element={<TeacherPage />} />
