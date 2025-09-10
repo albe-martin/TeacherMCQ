@@ -54,22 +54,20 @@ function QuizGenerator({ onGenerate }) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-50 to-white flex flex-col">
-      {/* Minimal full-width navbar, logo left-aligned */}
-      <nav className="fixed top-0 left-0 w-full h-16 flex items-center px-10 bg-white/95 backdrop-blur border-b border-orange-100 shadow-sm z-10">
+      {/* Responsive full-width navbar, logo left-aligned */}
+      <nav className="fixed top-0 left-0 w-full h-16 flex items-center px-4 sm:px-8 md:px-10 bg-white/95 backdrop-blur border-b border-orange-100 shadow-sm z-10">
         <span className="text-xl font-semibold text-orange-700 tracking-tight font-sans">Teacher MCQ Quiz</span>
       </nav>
-
-      {/* Main card, visually separated from navbar */}
-      <div className="flex-1 flex items-center justify-center pt-32 pb-64">
-        <Card className="w-full max-w-3xl bg-white border border-orange-100 shadow-lg rounded-2xl p-12 flex flex-col justify-center">
+      <div className="flex-1 flex items-center justify-center pt-24 pb-8 px-2 sm:px-4 md:px-0 w-full">
+        <Card className="w-full max-w-xs sm:max-w-md md:max-w-xl lg:max-w-2xl bg-white border border-orange-100 shadow-lg rounded-2xl p-4 sm:p-8 md:p-12 flex flex-col justify-center">
           <CardHeader>
-            <h1 className="text-3xl font-bold mb-2 text-orange-800 font-sans tracking-tight">Generate Quiz Questions</h1>
-            <div className="text-base text-orange-500 mb-8 font-normal font-sans">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 text-orange-800 font-sans tracking-tight">Generate Quiz Questions</h1>
+            <div className="text-sm sm:text-base text-orange-500 mb-6 sm:mb-8 font-normal font-sans">
               Create multiple-choice questions using AI. Enter your topic and number of questions below.
             </div>
           </CardHeader>
           <CardContent>
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               <div>
                 <label className="block mb-2 font-medium text-orange-700 text-base font-sans">Quiz Topic <span className="text-red-400">*</span></label>
                 <Input
@@ -77,7 +75,7 @@ function QuizGenerator({ onGenerate }) {
                   value={topic}
                   onChange={e => setTopic(e.target.value)}
                   placeholder="e.g., World War II, Photosynthesis, JavaScript Basics"
-                  className="bg-orange-50 border border-orange-200 text-base font-sans px-3 py-2 focus:ring-2 focus:ring-orange-300"
+                  className="bg-orange-50 border border-orange-200 text-base font-sans px-3 py-2 focus:ring-2 focus:ring-orange-300 w-full"
                 />
               </div>
               <div>
@@ -88,7 +86,7 @@ function QuizGenerator({ onGenerate }) {
                   max={20}
                   value={numQuestions}
                   onChange={e => setNumQuestions(Number(e.target.value))}
-                  className="bg-orange-50 border border-orange-200 text-base font-sans px-3 py-2 focus:ring-2 focus:ring-orange-300"
+                  className="bg-orange-50 border border-orange-200 text-base font-sans px-3 py-2 focus:ring-2 focus:ring-orange-300 w-full"
                 />
               </div>
               <Button onClick={handleGenerate} disabled={loading || !topic || !numQuestions} className="w-full bg-orange-500 hover:bg-orange-600 text-base font-semibold font-sans py-3 rounded-xl shadow-sm transition">
