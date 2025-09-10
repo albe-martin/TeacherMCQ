@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import { FiArrowLeft } from 'react-icons/fi';
+import Navbar from './Navbar';
 import QuizGenerator from './QuizGenerator';
 import QuizEditor from './QuizEditor';
 import StudentPreview from './StudentPreview';
@@ -23,31 +23,19 @@ function App() {
 
   // Landing page: only QuizGenerator
   const LandingPage = () => (
-    <div className="p-4 max-w-xl mx-auto">
-      <QuizGenerator onGenerate={handleGenerateQuiz} />
+    <div className="pt-20 px-4 flex justify-center">
+      <div className="w-full max-w-2xl">
+        <QuizGenerator onGenerate={handleGenerateQuiz} />
+      </div>
     </div>
   );
 
-  // Teacher page: toggle, editor, preview, back button
+  // Teacher page: toggle, editor, preview
   const TeacherPage = () => (
-    <div className="p-4 max-w-3xl mx-auto space-y-6 relative min-h-screen">
-      {/* Header with back and toggle buttons aligned */}
-      <div className="fixed top-4 left-0 w-full z-20 flex items-center justify-between px-8">
-        <button
-          className="flex items-center gap-2 px-4 py-2 rounded-full font-semibold border transition-colors focus:outline-none bg-white shadow border-gray-200 hover:bg-blue-100"
-          onClick={() => navigate('/')}
-          aria-label="Back to Home"
-          style={{ height: '48px' }}
-        >
-          <FiArrowLeft size={20} className="text-blue-600" />
-        </button>
-        <ModeToggle mode={mode} setMode={setMode} />
-      </div>
-      <div className="pt-24">
+    <div className="pt-20 px-4 flex justify-center min-h-screen">
+      <div className="w-full max-w-3xl">
         {mode === 'teacher' && (
-          <>
-            <QuizEditor questions={questions} setQuestions={setQuestions} />
-          </>
+          <QuizEditor questions={questions} setQuestions={setQuestions} />
         )}
         {mode === 'student' && (
           <StudentPreview questions={questions} />
@@ -57,10 +45,13 @@ function App() {
   );
 
   return (
-    <Routes>
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/teacher" element={<TeacherPage />} />
-    </Routes>
+    <>
+      <Navbar mode={mode} setMode={setMode} />
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/teacher" element={<TeacherPage />} />
+      </Routes>
+    </>
   );
 }
 
