@@ -11,7 +11,7 @@ function QuizGenerator({ onGenerate }) {
   const [error, setError] = React.useState("");
 
   // Hardcoded OpenAI API key (replace with your own for production)
-  const OPENAI_API_KEY = "sk-REPLACE_ME_WITH_YOUR_KEY";
+  const OPENAI_API_KEY = "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";
   const [apiKey, setApiKey] = React.useState("");
 
   // Fetch questions from OpenAI

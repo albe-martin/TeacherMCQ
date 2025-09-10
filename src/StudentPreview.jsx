@@ -37,7 +37,7 @@ function StudentPreview({ questions }) {
               <div className="font-semibold">{q.question}</div>
               <div className="space-y-1">
                 {q.options.map((opt, oIdx) => (
-                  <label key={oIdx} className="flex items-center gap-2">
+                  <label key={opt.id || oIdx} className="flex items-center gap-2">
                     <input
                       type="radio"
                       name={`q${qIdx}`}
@@ -45,7 +45,7 @@ function StudentPreview({ questions }) {
                       disabled={submitted}
                       onChange={() => handleSelect(qIdx, oIdx)}
                     />
-                    {opt}
+                    {typeof opt === 'object' ? opt.text : opt}
                   </label>
                 ))}
               </div>

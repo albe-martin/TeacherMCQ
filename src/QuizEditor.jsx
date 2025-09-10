@@ -4,25 +4,56 @@ import { Input } from "./components/ui/input";
 
 // QuizEditor: Lets teachers edit questions and answers
 function QuizEditor({ questions, setQuestions }) {
-  // Handler to update a question
-  const handleQuestionChange = (idx, value) => {
-    const updated = [...questions];
-    updated[idx].question = value;
-    setQuestions(updated);
+  // Local state for editing
+  const [editQuestions, setEditQuestions] = React.useState([]);
+
+  // Assign IDs only once when questions are first loaded
+  React.useEffect(() => {
+    if (questions.length > 0 && !questions.every(q => q.id && q.options.every(opt => typeof opt === 'object' && opt.id))) {
+      const updated = questions.map(q => ({
+        ...q,
+        id: q.id || crypto.randomUUID(),
+        options: q.options.map(opt =>
+          typeof opt === 'object' ? { ...opt, id: opt.id || crypto.randomUUID() } : { text: opt, id: crypto.randomUUID() }
+        )
+      }));
+      setQuestions(updated);
+      setEditQuestions(updated);
+    } else {
+      setEditQuestions(questions);
+    }
+    // eslint-disable-next-line
+  }, [questions]);
+
+  // Handler to update a question in local state
+  const handleQuestionChange = (id, value) => {
+    setEditQuestions(editQuestions.map(q =>
+      q.id === id ? { ...q, question: value } : q
+    ));
   };
 
-  // Handler to update an option
-  const handleOptionChange = (qIdx, oIdx, value) => {
-    const updated = [...questions];
-    updated[qIdx].options[oIdx] = value;
-    setQuestions(updated);
+  const handleOptionChange = (qId, oId, value) => {
+    setEditQuestions(editQuestions.map(q =>
+      q.id === qId
+        ? {
+            ...q,
+            options: q.options.map(opt =>
+              opt.id === oId ? { ...opt, text: value } : opt
+            ),
+          }
+        : q
+    ));
   };
 
-  // Handler to set correct answer
-  const handleAnswerChange = (qIdx, aIdx) => {
-    const updated = [...questions];
-    updated[qIdx].answer_idx = aIdx;
-    setQuestions(updated);
+  const handleAnswerChange = (qId, oId) => {
+    setEditQuestions(editQuestions.map(q =>
+      q.id === qId ? { ...q, answer_idx: q.options.findIndex(opt => opt.id === oId) } : q
+    ));
+  };
+
+  // Save changes to main questions state
+  const handleSave = () => {
+    setQuestions(editQuestions);
   };
 
   return (
@@ -30,31 +61,31 @@ function QuizEditor({ questions, setQuestions }) {
       <CardHeader>Quiz Editor</CardHeader>
       <CardContent>
         <div className="space-y-4">
-          {questions.length === 0 ? (
+          {editQuestions.length === 0 ? (
             <p>No questions yet. Generate a quiz first.</p>
           ) : (
-            questions.map((q, qIdx) => (
-              <Card key={qIdx} className="bg-gray-50">
+            editQuestions.map(q => (
+              <Card key={q.id} className="bg-gray-50">
                 <CardContent>
                   <Input
                     type="text"
                     value={q.question}
-                    onChange={e => handleQuestionChange(qIdx, e.target.value)}
+                    onChange={e => handleQuestionChange(q.id, e.target.value)}
                     className="mb-2"
                   />
                   <div className="space-y-1">
-                    {q.options.map((opt, oIdx) => (
-                      <div key={oIdx} className="flex items-center gap-2">
+                    {q.options.map(opt => (
+                      <div key={opt.id} className="flex items-center gap-2">
                         <Input
                           type="text"
-                          value={opt}
-                          onChange={e => handleOptionChange(qIdx, oIdx, e.target.value)}
+                          value={opt.text}
+                          onChange={e => handleOptionChange(q.id, opt.id, e.target.value)}
                           className="w-2/3"
                         />
                         <input
                           type="radio"
-                          checked={q.answer_idx === oIdx}
-                          onChange={() => handleAnswerChange(qIdx, oIdx)}
+                          checked={q.answer_idx === q.options.findIndex(o => o.id === opt.id)}
+                          onChange={() => handleAnswerChange(q.id, opt.id)}
                         />
                         <span>Correct</span>
                       </div>
@@ -64,6 +95,11 @@ function QuizEditor({ questions, setQuestions }) {
               </Card>
             ))
           )}
+        </div>
+        <div className="mt-6 flex justify-end">
+          <button className="bg-blue-600 text-white px-6 py-2 rounded font-semibold shadow hover:bg-blue-700" onClick={handleSave}>
+            Save Changes
+          </button>
         </div>
       </CardContent>
     </Card>

@@ -31,16 +31,16 @@ function App() {
   // Teacher page: toggle, editor, preview, back button
   const TeacherPage = () => (
     <div className="p-4 max-w-3xl mx-auto space-y-6 relative min-h-screen">
-      {/* Back button top left */}
-      <button
-        className="fixed top-4 left-4 z-20 flex items-center gap-2 px-3 py-2 rounded-full bg-white shadow hover:bg-gray-100 transition-colors border border-gray-200"
-        onClick={() => navigate('/')}
-        aria-label="Back to Home"
-      >
-        <FiArrowLeft size={20} />
-      </button>
-      {/* ModeToggle top right */}
-      <div className="fixed top-4 right-4 z-20">
+      {/* Header with back and toggle buttons aligned */}
+      <div className="fixed top-4 left-0 w-full z-20 flex items-center justify-between px-8">
+        <button
+          className="flex items-center gap-2 px-4 py-2 rounded-full font-semibold border transition-colors focus:outline-none bg-white shadow border-gray-200 hover:bg-blue-100"
+          onClick={() => navigate('/')}
+          aria-label="Back to Home"
+          style={{ height: '48px' }}
+        >
+          <FiArrowLeft size={20} className="text-blue-600" />
+        </button>
         <ModeToggle mode={mode} setMode={setMode} />
       </div>
       <div className="pt-24">
