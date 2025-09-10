@@ -68,7 +68,7 @@ function StudentPreview({ questions }) {
             <SpiralLogo size={36} />
           </div>
           <div className="text-lg font-bold text-gray-800 mb-3">Progress</div>
-          <div className="mb-2 text-base font-medium text-gray-700">
+          <div className="mb-5 text-base font-medium text-gray-700">
             Question {current + 1} of {validQuestions.length}{" "}
             <span className="ml-2">
               {Math.round(
@@ -77,7 +77,7 @@ function StudentPreview({ questions }) {
               %
             </span>
           </div>
-          <div className="flex gap-0.5 mb-8">
+          <div className="flex gap-2 mb-8">
             {validQuestions.map((_, idx) => (
               <div
                 key={idx}
@@ -152,7 +152,7 @@ function StudentPreview({ questions }) {
                 type="button"
                 onClick={handlePrev}
                 disabled={current === 0 || submitted}
-                className="px-8 py-3 rounded bg-gray-100 text-gray-500 font-semibold shadow disabled:opacity-50 text-lg"
+                className="px-8 py-3 rounded-2xl bg-gray-100 text-gray-500 font-semibold shadow disabled:opacity-50 text-lg"
               >
                 Previous
               </button>
@@ -161,7 +161,7 @@ function StudentPreview({ questions }) {
                   type="button"
                   onClick={handleNext}
                   disabled={answers[current] === null}
-                  className="px-8 py-3 rounded bg-orange-200 text-orange-700 font-semibold shadow disabled:opacity-50 text-lg"
+                  className="px-8 py-3 rounded-2xl bg-orange-200 text-orange-700 font-semibold shadow disabled:opacity-50 text-lg"
                 >
                   Next
                 </button>
@@ -169,7 +169,7 @@ function StudentPreview({ questions }) {
                 <button
                   type="submit"
                   disabled={answers[current] === null}
-                  className="px-8 py-3 rounded bg-orange-500 text-white font-semibold shadow disabled:opacity-50 text-lg"
+                  className="px-8 py-3 rounded-2xl bg-orange-500 text-white font-semibold shadow disabled:opacity-50 text-lg"
                 >
                   Submit
                 </button>
