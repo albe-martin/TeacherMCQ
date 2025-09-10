@@ -58,7 +58,7 @@ function QuizGenerator({ onGenerate }) {
       <nav className="fixed top-0 left-0 w-full h-16 flex items-center px-4 sm:px-8 md:px-10 bg-white/95 backdrop-blur border-b border-orange-100 shadow-sm z-10">
         <span className="text-xl font-semibold text-orange-700 tracking-tight font-sans">Teacher MCQ Quiz</span>
       </nav>
-      <div className="flex-1 flex items-center justify-center pt-24 pb-8 px-2 sm:px-4 md:px-0 w-full">
+      <div className="flex-1 flex items-center justify-center pt-12 pb-8 px-2 sm:px-4 md:px-0 w-full">
         <Card className="w-full max-w-xs sm:max-w-md md:max-w-xl lg:max-w-2xl bg-white border border-orange-100 shadow-lg rounded-2xl p-4 sm:p-8 md:p-12 flex flex-col justify-center">
           <CardHeader>
             <h1 className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 text-orange-800 font-sans tracking-tight">Generate Quiz Questions</h1>
