@@ -75,7 +75,7 @@ function QuizEditor({ questions, setQuestions }) {
                 type="text"
                 value={q.question}
                 onChange={e => handleQuestionChange(q.id, e.target.value)}
-                className="mb-6 bg-white border border-orange-100 text-base px-4 py-3 rounded-lg font-sans w-full"
+                className="mb-6 bg-white border border-orange-100 text-base px-4 py-3 rounded-2xl font-sans w-full transition-all"
               />
               <div className="mb-4 text-base font-medium text-gray-600">Answer Options</div>
               <div className="space-y-3 mb-4">
@@ -91,7 +91,7 @@ function QuizEditor({ questions, setQuestions }) {
                       type="text"
                       value={opt.text}
                       onChange={e => handleOptionChange(q.id, opt.id, e.target.value)}
-                      className="bg-white border border-orange-100 text-base px-4 py-2 rounded-lg font-sans w-full"
+                      className="bg-white border border-orange-100 text-base px-4 py-2 rounded-2xl font-sans w-full transition-all"
                     />
                   </div>
                 ))}
